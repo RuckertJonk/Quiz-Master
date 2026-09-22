@@ -1,0 +1,273 @@
+<?php
+$host = 'localhost';
+$dbname = 'quizmaker';
+$username = 'bit_academy';
+$password = 'bit_academy';
+
+$conn = new mysqli($host, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Database fout: " . $conn->connect_error);
+}
+
+if (!isset($_GET['id'])) {
+    die("Geen quiz geselecteerd.");
+}
+
+$quiz_id = intval($_GET['id']);
+
+// Quiz ophalen
+$quiz = $conn->query("SELECT * FROM quizzes WHERE quiz_id = $quiz_id")->fetch_assoc();
+if (!$quiz) {
+    die("Quiz niet gevonden.");
+}
+
+// Alle vragen ophalen
+$vragen = $conn->query("SELECT * FROM vragen WHERE quiz_id = $quiz_id");
+$vragen_lijst = $vragen->fetch_all(MYSQLI_ASSOC);
+
+// Huidige vraag bepalen
+$index = isset($_GET['q']) ? intval($_GET['q']) : 0;
+
+// Resultaat tonen?
+if ($index >= count($vragen_lijst)) {
+    $score = intval($_COOKIE["quiz_score"] ?? 0);
+    $total = count($vragen_lijst);
+    ?>
+    
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultaat</title>
+
+    <style>
+        body {
+            background-color: #e9eff6;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            margin: auto;
+            max-width: 400px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        input {
+            padding: 12px;
+            width: 90%;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 14px 20px;
+            margin-top: 20px;
+            background: #1A3A5F;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #162F4D;
+        }
+
+        @media (max-width: 600px) {
+            .box {
+                padding: 20px;
+            }
+            button {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Je bent klaar!</h1>
+    <p>Je score:</p>
+    <h2><?= $score ?> / <?= $total ?></h2>
+
+    <p>Naam voor leaderboard:</p>
+    <input type="text" id="playerName" placeholder="Jouw naam">
+
+    <button onclick="saveScore()">Opslaan</button>
+    <button onclick="window.location.href='quiz.overzicht.php'">Terug naar menu</button>
+</div>
+
+<script>
+function saveScore() {
+    const name = document.getElementById("playerName").value.trim();
+    if (!name) return;
+
+    const score = <?= $score ?>;
+    const total = <?= $total ?>;
+
+    const existing = localStorage.getItem("quizLeaderboard");
+    const leaderboard = existing ? JSON.parse(existing) : [];
+
+    leaderboard.push({
+        name: name.replace(/</g, "&lt;"),
+        score,
+        total,
+        date: new Date().toISOString()
+    });
+
+    leaderboard.sort((a, b) => b.score - a.score);
+
+    localStorage.setItem("quizLeaderboard", JSON.stringify(leaderboard));
+
+    window.location.href = "leaderboard.php";
+}
+</script>
+
+</body>
+</html>
+
+<?php
+exit;
+}
+
+// Huidige vraag ophalen
+$vraag = $vragen_lijst[$index];
+$vraag_id = $vraag['vraag_id'];
+
+// Antwoorden ophalen
+$antwoorden = $conn->query("SELECT * FROM antwoorden WHERE vraag_id = $vraag_id")->fetch_all(MYSQLI_ASSOC);
+
+// Score verwerken
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $gekozen = intval($_POST["antwoord"]);
+    $correct = $conn->query("SELECT is_correct FROM antwoorden WHERE antwoord_id = $gekozen")->fetch_assoc()['is_correct'];
+
+    $huidige_score = intval($_COOKIE["quiz_score"] ?? 0);
+    if ($correct == 1) {
+        $huidige_score++;
+    }
+
+    setcookie("quiz_score", $huidige_score, time() + 3600);
+
+    header("Location: quizspelen.php?id=$quiz_id&q=" . ($index + 1));
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($quiz['titel']) ?></title>
+
+    <style>
+        body {
+            background-color: #F4F7FA;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            background: #1A3A5F;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            border-bottom: 4px solid #162F4D;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+        }
+
+        h2 {
+            color: #1A3A5F;
+        }
+
+        label {
+            display: block;
+            background: #eef3fa;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        label:hover {
+            background: #dce6f3;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 14px 25px;
+            background: #1A3A5F;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #162F4D;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 18px;
+            }
+            button {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header><?= htmlspecialchars($quiz['titel']) ?></header>
+
+<div class="container">
+    <h2>Vraag <?= $index + 1 ?> van <?= count($vragen_lijst) ?></h2>
+    <h3><?= htmlspecialchars($vraag['vraagtekst']) ?></h3>
+
+    <form method="POST">
+        <?php foreach ($antwoorden as $antwoord): ?>
+            <label>
+                <input type="radio" name="antwoord" value="<?= $antwoord['antwoord_id'] ?>" required>
+                <?= htmlspecialchars($antwoord['antwoordtekst']) ?>
+            </label>
+        <?php endforeach; ?>
+
+        <button type="submit">Volgende</button>
+    </form>
+</div>
+
+</body>
+</html>
