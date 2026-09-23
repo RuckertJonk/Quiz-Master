@@ -1,59 +1,75 @@
-# Quiz-Masters
+# Eind Project Idee
 
-## Beschrijving
+## Naam  
+**Team Select**
 
-Quiz-Masters is een website waarop gebruikers eenvoudig quizzen kunnen maken, spelen, uploaden en downloaden. De website is ontworpen zodat zowel nieuwe als ingelogde gebruikers snel aan de slag kunnen.
+## Caption  
+*Choose your teams from the multiverse to train and fight with*
 
-## Startpagina
+---
 
-Op de startpagina krijgt de gebruiker drie keuzes:
 
-* **Quiz spelen**
-* **Quiz maken**
-* **Inloggen**
+## Screenshot  
+Zo ziet de website eruit:
 
-## Quiz spelen
+![Website Screenshot](screenshot.png)
 
-Wanneer de gebruiker kiest voor **Quiz spelen**, komt hij op een pagina waar hij zijn beschikbare quizzen kan bekijken en spelen. Hier kan hij:
+---
 
-* Een quiz uit zijn account selecteren.
-* Een quiz starten.
-* Doorgaan naar de pagina **Quiz maken**.
-* Naar de **Inlogpagina** gaan.
+## Teams
+- Fight Club  
+- Cobra Kai / Miyagi Do  
+- Peaky Blinders  
+- Strawhats  
+- Sparta (GOW)  
+- The Boys / The Seven  
+- later toegevoegde teams
 
-## Inlogpagina
+---
 
-Op de inlogpagina kan de gebruiker:
+## Easter Eggs
+- Invincible  
+- American Psycho
+- Wolf of Wall Street  
+- Se7en
+- Breaking Bad
+- Two and a Half Men
 
-* Inloggen met een bestaand account.
-* Een nieuw account registreren als hij nog geen account heeft.
+---
 
-## Quiz maken
+## Webside Details
 
-Op de pagina **Quiz maken** kan een ingelogde gebruiker:
+### Start  
+Bij het begin zie je de teams op een rijtje en kun je iemand kiezen om te joinen. Onderaan de pagina staat nieuws uit de multiverse (easter eggs uit films).
 
-* Een nieuwe quiz aanmaken.
-* Vragen en antwoordmogelijkheden toevoegen.
-* De quiz opslaan.
-* De quiz uploaden zodat deze later gespeeld kan worden.
-* Een bestaande quiz downloaden of aanpassen.
+### Team details  
+Als je op je team klikt die je wilt joinen dan kom je op een pagina met de details over je team, zoals:  
+- van welke game of serie  
+- Wie is de leider  
+- Bekende members
+- Details over het team of hun doel
 
-## Database
+### Teams toevoegen  
+Als er teams zijn die je wilt toevoegen dan kun je ze opsturen en komen ze op de startpagina.
 
-De website maakt gebruik van een MySQL-database waarin alle gegevens worden opgeslagen. De database bevat onder andere:
+### Inloggen  
+Je kunt inloggen en als je inlogt krijg je de optie om meer teams aan te vragen.
 
-* Gebruikersaccounts en inloggegevens.
-* Quizzen die door gebruikers zijn aangemaakt.
-* Vragen en antwoordmogelijkheden van iedere quiz.
-* Behaalde scores van gebruikers.
-* Verdiende badges.
-* De leaderboard met de hoogste scores.
+### Account maken
+Hier kun je je account aanmaken voor het inloggen
 
-## Belangrijkste functies
+### Account pagina
+Hier kun je gewoon je account bekijken en krijg je je informatie en teams of teams te zien
 
-* Account aanmaken en inloggen.
-* Quizzen maken.
-* Quizzen spelen.
-* Quizzen uploaden.
-* Quizzen downloaden.
-* Eigen quizzen beheren via het account.
+### Inspitatie pagina
+Hier zie je waar ik de styling van elke pagina heb op gebaseerd
+
+### Verschillende paginas
+- Start pagina
+- Detail pagina
+- Team toevoeg pagina
+- Inlog pagina
+- Account aanmaak pagina
+- Account pagina
+- Inspiratie pagina
+
