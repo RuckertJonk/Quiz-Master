@@ -1,13 +1,10 @@
-# Eind Project Idee
+# Quiz-Masters
 
-## Naam  
-**Team Select**
+## Beschrijving
 
-## Caption  
-*Choose your teams from the multiverse to train and fight with*
+Quiz-Masters is een website waarop gebruikers eenvoudig quizzen kunnen maken, spelen, uploaden en downloaden. De website is ontworpen zodat zowel nieuwe als ingelogde gebruikers snel aan de slag kunnen.
 
 ---
-
 
 ## Screenshot  
 Zo ziet de website eruit:
@@ -16,60 +13,57 @@ Zo ziet de website eruit:
 
 ---
 
-## Teams
-- Fight Club  
-- Cobra Kai / Miyagi Do  
-- Peaky Blinders  
-- Strawhats  
-- Sparta (GOW)  
-- The Boys / The Seven  
-- later toegevoegde teams
+## Startpagina
 
----
+Op de startpagina krijgt de gebruiker drie keuzes:
 
-## Easter Eggs
-- Invincible  
-- American Psycho
-- Wolf of Wall Street  
-- Se7en
-- Breaking Bad
-- Two and a Half Men
+* **Quiz spelen**
+* **Quiz maken**
+* **Inloggen**
 
----
+## Quiz spelen
 
-## Webside Details
+Wanneer de gebruiker kiest voor **Quiz spelen**, komt hij op een pagina waar hij zijn beschikbare quizzen kan bekijken en spelen. Hier kan hij:
 
-### Start  
-Bij het begin zie je de teams op een rijtje en kun je iemand kiezen om te joinen. Onderaan de pagina staat nieuws uit de multiverse (easter eggs uit films).
+* Een quiz uit zijn account selecteren.
+* Een quiz starten.
+* Doorgaan naar de pagina **Quiz maken**.
+* Naar de **Inlogpagina** gaan.
 
-### Team details  
-Als je op je team klikt die je wilt joinen dan kom je op een pagina met de details over je team, zoals:  
-- van welke game of serie  
-- Wie is de leider  
-- Bekende members
-- Details over het team of hun doel
+## Inlogpagina
 
-### Teams toevoegen  
-Als er teams zijn die je wilt toevoegen dan kun je ze opsturen en komen ze op de startpagina.
+Op de inlogpagina kan de gebruiker:
 
-### Inloggen  
-Je kunt inloggen en als je inlogt krijg je de optie om meer teams aan te vragen.
+* Inloggen met een bestaand account.
+* Een nieuw account registreren als hij nog geen account heeft.
 
-### Account maken
-Hier kun je je account aanmaken voor het inloggen
+## Quiz maken
 
-### Account pagina
-Hier kun je gewoon je account bekijken en krijg je je informatie en teams of teams te zien
+Op de pagina **Quiz maken** kan een ingelogde gebruiker:
 
-### Inspitatie pagina
-Hier zie je waar ik de styling van elke pagina heb op gebaseerd
+* Een nieuwe quiz aanmaken.
+* Vragen en antwoordmogelijkheden toevoegen.
+* De quiz opslaan.
+* De quiz uploaden zodat deze later gespeeld kan worden.
+* Een bestaande quiz downloaden of aanpassen.
 
-### Verschillende paginas
-- Start pagina
-- Detail pagina
-- Team toevoeg pagina
-- Inlog pagina
-- Account aanmaak pagina
-- Account pagina
-- Inspiratie pagina
+## Database
+
+De website maakt gebruik van een MySQL-database waarin alle gegevens worden opgeslagen. De database bevat onder andere:
+
+* Gebruikersaccounts en inloggegevens.
+* Quizzen die door gebruikers zijn aangemaakt.
+* Vragen en antwoordmogelijkheden van iedere quiz.
+* Behaalde scores van gebruikers.
+* Verdiende badges.
+* De leaderboard met de hoogste scores.
+
+## Belangrijkste functies
+
+* Account aanmaken en inloggen.
+* Quizzen maken.
+* Quizzen spelen.
+* Quizzen uploaden.
+* Quizzen downloaden.
+* Eigen quizzen beheren via het account.
 
